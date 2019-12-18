@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+	<title>Codejam - Palette</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="storage.js"></script>
+  <script src="model.js"></script>
+  <script src="utils.js"></script>
+  <script src="controller.js"></script>
+  <script src="image.js"></script>
+  <script src="view.js"></script>
+  <script src="editor.js"></script>
+  <script src="main.js"></script>
+</head>
+<body>
+  <header>
+    <p id="TaskTitle"><span class="material-icons material-icons.md-18">menu</span>Codejam - Palette</p>
+  </header>
+  <div id="left">
+    <div id="editor-tools" class="border div-padding-top">
+      <ul id="toolboxList" class="pickListStub">
+        <li id="no-tool"><span class="material-icons material-icons.md-18">mouse</span>Pointer</li>
+        <li id="fill-bucket-tool"><span class="material-icons material-icons.md-18">format_paint</span>Fill bucket</li>
+        <li id="choose-color"><span class="material-icons">colorize</span>Choose color</li>
+        <li id="pencil-tool"><span class="material-icons">edit</span>Pencil</li>
+        <li id="transform-tool"><span class="material-icons">compare_arrows</span>Transform</li>
+      </ul>
+    </div>
+    <div id="divEmptySpace" style="height: 3em"></div>
+    <div id="editor-colors" class="border div-padding-top">
+      <ul id="listColors" class="pickListStub">
+        <li><span id="currentColor-color" class="editor-color-circle" style="background-color:rgb(255,255,255)"></span>
+            Current color</li>
+        <li><span id="prevColor-color"class="editor-color-circle" style="background-color:rgb(255,255,255)"></span>
+        Previous color</li>
+        <hr>
+        <li id="choose-predefined-color-FF0000" onclick="G_CONTROLLER.callback_MouseClickChoosePredefinedColor(this)">
+          <span class="editor-color-circle" style="background-color:rgb(255,0,0)"></span>
+          red
+        </li>
+        <li id="choose-predefined-color-00FF00" onclick="G_CONTROLLER.callback_MouseClickChoosePredefinedColor(this)">
+          <span class="editor-color-circle" style="background-color:rgb(0,255,0)"></span>
+          green
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div id="right">
+    <div id="create-new-image" class="border">
+      <p class="picklist-title">New image</p>
+      <!-- some copy-paste! ;-) -->
+      <ul class="pickListStub">
+        <li id="pick-new-image-size-4" onclick="G_CONTROLLER.callback_MouseClickPickNewImageSize(this)">4x4</li>
+        <li id="pick-new-image-size-8" onclick="G_CONTROLLER.callback_MouseClickPickNewImageSize(this)">8x8</li>
+        <li id="pick-new-image-size-16" onclick="G_CONTROLLER.callback_MouseClickPickNewImageSize(this)">16x16</li>
+        <li id="pick-new-image-size-32" onclick="G_CONTROLLER.callback_MouseClickPickNewImageSize(this)">32x32</li>
+        <li id="pick-new-image-size-64" onclick="G_CONTROLLER.callback_MouseClickPickNewImageSize(this)">64x64</li>
+      </ul>
+    <button id="btn-create-new-image" class="picklist-button" onclick="G_CONTROLLER.callback_MouseClickCreateNewImage()">Create!</button>
+    </div>
+    <div style="height: 3em"></div>
+    <div id="editor-colors" class="border">
+      <p class="picklist-title">Templates</p>
+      <ul class="pickListStub">
+        <li id="create-new-image-4">Central symmetry (4x4)</li>
+        <li id="create-new-image-32">Codewars logo (32x32)</li>
+      </ul>
+      <button id="btn-load" class="picklist-button">Load!</button>
+    </div>
+  </div>
+
+  <canvas id="canvasMain"></canvas>
+</body>
+</html>

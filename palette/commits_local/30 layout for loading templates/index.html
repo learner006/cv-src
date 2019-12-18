@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+	<title>Codejam - Palette</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="storage.js"></script>
+  <script src="model.js"></script>
+  <script src="utils.js"></script>
+  <script src="controller.js"></script>
+  <script src="image.js"></script>
+  <script src="view.js"></script>
+  <script src="editor.js"></script>
+  <script src="main.js"></script>
+</head>
+<body>
+  <header>
+    <p id="TaskTitle"><span class="material-icons material-icons.md-18">menu</span>Codejam - Palette</p>
+  </header>
+  <div id="left">
+    <div id="editor-tools" class="border div-padding-top">
+      <ul id="toolboxList" class="pickListStub">
+        <li id="fill-bucket-tool"><span class="material-icons material-icons.md-18">format_paint</span>Fill bucket</li>
+        <li id="choose-color"><span class="material-icons">colorize</span>Choose color</li>
+        <li id="pencil-tool"><span class="material-icons">edit</span>Pencil</li>
+        <li id="transfor">Transform</li>
+      </ul>
+    </div>
+    <div id="divEmptySpace" style="height: 3em"></div>
+    <div id="editor-colors" class="border div-padding-top">
+      <ul id="listColors" class="pickListStub">
+        <li><span class="editor-color-circle" style="background-color:rgb(255,255,255)"></span>
+            Current color</li>
+        <li><li><span class="editor-color-circle" style="background-color:rgb(255,255,255)"></span>
+        Previous color</li>
+        <hr>
+        <li><li><span class="editor-color-circle" style="background-color:rgb(255,0,0)"></span>
+        red</li>
+        <li><li><span class="editor-color-circle" style="background-color:rgb(0,255,0)"></span>
+        blue</li>
+      </ul>
+    </div>
+  </div>
+  <div id="right">
+    <div id="create-new-image" class="border div-padding-top">
+      <ul class="pickListStub">
+        <li id="create-new-image-4">4x4</li>
+        <li id="create-new-image-8">8x8</li>
+        <li id="create-new-image-16">16x16</li>
+        <li id="create-new-image-32">32x32</li>
+        <li id="create-new-image-64">64x64</li>
+        <li style="text-align: center"><button id="btn-create">Create!</button></li>
+      </ul>
+    </div>
+    <div style="height: 3em"></div>
+    <div id="editor-colors" class="border div-padding-top">
+      <ul class="pickListStub">
+        <li style="text-align: center">Image templates</li>
+        <li id="create-new-image-4">4x4</li>
+        <li id="create-new-image-32">32x32</li>
+        <li style="text-align: center"><button id="btn-load">Load!</button></li>
+      </ul>
+    </div>
+  </div>
+
+  <canvas id="canvasMain"></canvas>
+</body>
+</html>

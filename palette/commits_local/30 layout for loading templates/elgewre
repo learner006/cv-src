@@ -1,0 +1,7 @@
+  <div id="left">
+    <div id="editor-tools" class="border">
+    </div>
+    <div style="height: 3em"></div>
+    <div id="editor-colors" class="border">
+    </div>
+  </div>

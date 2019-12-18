@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+	<title>Codejam - Palette</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="storage.js"></script>
+  <script src="model.js"></script>
+  <script src="utils.js"></script>
+  <script src="controller.js"></script>
+  <script src="image.js"></script>
+  <script src="view.js"></script>
+  <script src="editor.js"></script>
+  <script src="main.js"></script>
+</head>
+<body>
+  <header>
+    <p id="TaskTitle">Codejam - canvas</p>
+  </header>
+  <div id="left" class="border">
+    <ul id="toolboxList" class="pickListStub">
+      <li id="fill-bucket-tool">Fill bucket</li>
+      <li id="choose-color">Choose color</li>
+      <li id="pencil-tool">Pencil</li>
+      <li id="transfor">Transform</li>
+    </ul>
+    <div id="divEmptySpace" style="height: 3em"></div>
+    <ul id="listColors" class="pickListStub">
+      <li>Current color</li>
+      <li>Previous color</li>
+      <li>red</li>
+      <li>blue</li>
+    </ul>
+  </div>
+  <canvas id="canvasMain"></canvas>
+</body>
+</html>
