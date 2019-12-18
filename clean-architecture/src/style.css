@@ -1,0 +1,139 @@
+body {
+/*  background-color: #c8c8c8; /* dark grey */
+  background-color: #ebebe0; /* light grey +- */
+}
+
+#left-pane {
+  width: 18%;
+  float: left;
+}
+
+#right-pane {
+  width: 18%;
+  float: right;
+}
+
+.header__task-title {
+	margin-left: 10%;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+/** MATERIAL DESIGN ICONS **/
+
+.inline-material-icon {
+  vertical-align: middle;
+}
+
+.default-list-style span {
+  vertical-align: middle;
+}
+
+.material-icons {
+  margin-right: 0.7em;  
+}
+
+/** MATERIAL DESIGN ICONS (END) **/
+
+
+.user-message {
+  position: fixed;
+	bottom:0;
+	right:0;
+
+  width: 75%;
+  margin-bottom: 10px;
+
+  left: 50%;
+  transform: translateX(-50%);
+
+  border: 2px solid black;
+  border-radius: 10px;
+
+  font-size: 1.5em;
+  font-weight: bold;
+
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+}
+
+.error-popup {
+  background-color: red;
+  color: white;
+}
+
+.notification-popup {
+  background-color: white;
+  color: black;
+}
+
+/*
+div {
+  border: 2px solid green;
+}
+*/
+
+/** LISTS **/
+
+.default-list-style hr {
+  margin-bottom: 1.6em;
+}
+
+
+.default-list-style {
+	margin: 0;
+	padding: 0;
+
+	list-style: none;
+
+  padding-top: 1em;
+	line-height: 2em;
+
+  border: 2px solid black;
+}
+
+.default-list-style li {
+	padding-left: 15px;
+	cursor: pointer;
+  margin-bottom: 0.7em;
+}
+
+.default-list-style li:hover {
+	background-color: #f5f5f0;
+}
+
+.default-list-style .li-selected, .default-list-style .li-selected:hover {
+	font-weight: bold;
+	cursor: default;
+	background-color: #ff9999;
+}
+
+/** LISTS(END) **/
+
+.empty-vspace-div {
+  height: 3em
+}
+
+.canvas-main {
+	background-color: #e1e1d0;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+  width: 512px;
+  height: 512px;
+}
+
+/** COLORS MANIPULATION TOOLS **/
+
+.editor-color-circle {
+  position: relative;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid black;
+  margin-right: 0.7em;
+}
+
+/** COLORS MANIPULATION TOOLS (END) **/

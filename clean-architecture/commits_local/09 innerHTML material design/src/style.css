@@ -1,0 +1,19 @@
+body {
+  background-color: #c8c8c8;
+}
+
+#left-pane {
+  width: 18%;
+  float: left;
+}
+
+#right-pane {
+  width: 18%;
+  float: right;
+}
+
+.header__task-title {
+	margin-left: 10%;
+	font-size: 1.2em;
+	font-weight: bold;
+}

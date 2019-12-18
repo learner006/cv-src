@@ -1,0 +1,12 @@
+switcher and notifications
+
+notifications -> wrapper, like the canvas element has
+
+switcher: 2 элемента:
+1) свитчер itself, контейнер switcher-parent-div
+2) переключатель switcher-control-parent-div
+ВСЁ ПРОСТО! :-)
+
+2) можно красивым и навороченным сделать
+
+think out
