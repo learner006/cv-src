@@ -1,0 +1,20 @@
+///////////////////////////////////////////////////////////////////////////
+//
+//
+
+Application name
+local-server-app
+
+Client ID
+094b8223ae57d27a9e19
+
+Client Secret
+de46b92b642fc6a4d9955efcf9eed0ce3934ca40
+
+Homepage URL
+http://localhost:5000/
+
+Authorization callback URL
+http://localhost:5000/redir
+
+///////////////////////////////////////////////////////////////////////////

@@ -1,0 +1,8 @@
+https://stackabuse.com/the-node-js-request-module/
+
+Speaking of helper methods, a much more succinct way of calling the different HTTP methods is to use the respective helper methods provided. Here are a few of the more commonly used ones:
+
+request.get(options, callback)
+request.post(options, callback)
+request.head(options, callback)
+request.delete(options, callback)

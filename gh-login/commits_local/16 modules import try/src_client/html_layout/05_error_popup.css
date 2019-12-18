@@ -1,0 +1,84 @@
+body {
+  background-color: #ebebe0;
+}
+
+/** to debug **/
+divxx,pxx {
+  border: 2px solid black;
+}
+/*__*/
+
+.user-message {
+  position: fixed;
+	bottom:0;
+	right:0;
+
+  width: 75%;
+  margin-bottom: 10px;
+
+  left: 50%;
+  transform: translateX(-50%);
+
+  border: 2px solid black;
+  border-radius: 10px;
+
+  font-size: 1.5em;
+  font-weight: bold;
+
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+}
+
+.error-popup {
+  background-color: red;
+  color: white;
+}
+
+.user-message p {
+}
+
+
+.inline-material-icon {
+  vertical-align: bottom;
+}
+
+.avatar-image {
+  width: 1.2em;  /* == header__font-size */
+  height: 1.2em; /* == header__font-size */
+  background-color: white;
+
+  position: relative;
+  display: inline-block;
+
+  vertical-align: bottom;
+
+  border-radius: 4px;
+
+  background-image: url("https://avatars0.githubusercontent.com/u/55109130?s=460&v=4");
+  background-size: 100%;
+
+  border: 1px solid black;
+}
+
+
+
+header {
+  font-size: 1.2em;
+}
+
+
+.header__task-title {
+  float: left;
+	margin-left: 10%;
+	font-weight: bold;
+}
+
+.header__login-status-info {
+  float: right;
+  margin-right: 2%;
+}
+
+.header__sign-out {
+  margin-left: 13px;
+}

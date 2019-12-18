@@ -1,0 +1,13 @@
+body {
+  background-color: #ebebe0;
+}
+
+.task-title {
+	margin-left: 10%;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.inline-material-icon {
+  vertical-align: bottom;
+}

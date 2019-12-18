@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Stack Abuse</title>
+    <meta name="HandheldFriendly" content="True" />
+	<meta name="keywords" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<!-- fav icons -->
+	<!--<link rel="shortcut icon" href="/favicon.ico">-->
+	<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png?v=69bda66e75">
+	<link rel="apple-touch-icon" sizes="72x72" href="/assets/images/apple-touch-icon-72x72.png?v=69bda66e75">
+	<link rel="apple-touch-icon" sizes="114x114" href="/assets/images/apple-touch-icon-114x114.png?v=69bda66e75">
+    <!-- header scripts -->
+    <script type="text/javascript" src="//cdn.thisiswaldo.com/static/js/3873.js"></script>
+	<!-- stylesheets -->
+    <link href="//fonts.googleapis.com/css?family=Nunito:400,400i,700,700i" rel="stylesheet">
+	<link rel="stylesheet" href="/assets/css/bootstrap.min.css?v=69bda66e75">
+	<link rel="stylesheet" href="/assets/css/font-awesome.min.css?v=69bda66e75">
+	<link rel="stylesheet" type="text/css" href="/assets/css/screen.css?v=69bda66e75">
+	<link rel="stylesheet" type="text/css" href="/assets/css/hl-styles/atom_one_dark.css?v=69bda66e75">
+	<script>
+/*====================================================
+  THEME SETTINGS & GLOBAL VARIABLES
+====================================================*/
+//  1. Disqus comment settings
+var disqus_shortname = 'stackabuse'; // required: replace example with your forum shortname
+
+//	2. Sidebar Position
+var sidebar_left = false; // Set true or flase for positioning sidebar on left
+
+//  3. Recent Post count
+var recent_post_count = 3;
+
+//	4. Google+ badge settings
+var badge_type = 'page'; // person / page / community ----- three type of google badge
+var google_plus_url = 'https://plus.google.com/111813546240107028721';
+
+//	5. Facebook Page Setting
+var facebook_page_url = 'https://www.facebook.com/stackabuse';
+
+//	6. Twitter Setting
+var twitter_url = 'https://twitter.com/ScottWRobinson';
+var twitter_widget_id = '722928793669607425';
+var number_of_tweet = 3;
+
+//	7. Mailchimp signup form Setting
+var mailchimp_form_url = '//stackabuse.us10.list-manage.com/subscribe/post?u=90b216fdbe02b25619ec94fc3&amp;id=bc2bb312cd';
+var success_message = "Please check your inbox and confirm your email address. Thank you!";
+
+//	8. Flickr Setting
+//var flickr_id = '52617155@N08';
+var flickr_id = '';
+
+// 9. Adsense Channels
+var adsense_tag_to_channel_name = {
+    'node': 'sa-topic-node-js',
+    'javascript': 'sa-topic-javascript',
+    'python': 'sa-topic-python',
+    'java': 'sa-topic-java',
+    'machine learning': 'sa-topic-machine-learning',
+    'artificial intelligence': 'sa-topic-ai',
+    'tensorflow': 'sa-topic-tensorflow',
+    'scikit-learn': 'sa-topic-scikit-learn',
+    'algorithms': 'sa-topic-algorithms',
+    'data structures': 'sa-topic-data-structures',
+    'aws': 'sa-topic-aws',
+    'apache': 'sa-topic-apache',
+    'django': 'sa-topic-django',
+    'flask': 'sa-topic-flask',
+    'shell': 'sa-topic-shell',
+    'bash': 'sa-topic-bash',
+    'npm': 'sa-topic-npm',
+    'unix': 'sa-topic-unix',
+    'linux': 'sa-topic-linux',
+    'json': 'sa-topic-json',
+    'maven': 'sa-topic-maven',
+    'web framework': 'sa-topic-web-framework',
+    'security': 'sa-topic-security',
+    'arduino': 'sa-topic-arduino',
+    'express': 'sa-topic-express-js',
+    'es6': 'sa-topic-es6',
+    'mongodb': 'sa-topic-mongodb',
+    'how to': 'sa-topic-how-to',
+};
+var adsense_author_to_channel_name = {
+    'Scott Robinson': 'sa-author-scott-robinson',
+    'Frank Hofmann': 'sa-author-frank-hofmann',
+    'Adam McQuistan': 'sa-author-adam-mcquistan',
+    'Tendai Mutunhire': 'sa-author-tendai-mutunhire',
+    'Guest Contributor': 'sa-author-guest-contributor',
+    'Mihajlo Pavloski': 'sa-author-mihajlo-pavloski',
+    'Esther Vaati': 'sa-author-esther-vaati',
+    'Adnan Rahic': 'sa-author-adnan-rahic',
+    'Sam Galizia': 'sa-author-sam-galizia',
+};
+var adsense_channel_name_to_id = {
+    'sa-author-scott-robinson': '5091228512',
+    'sa-author-frank-hofmann': '5574923176',
+    'sa-author-adam-mcquistan': '5470502461',
+    'sa-author-tendai-mutunhire': '4157420794',
+    'sa-author-guest-contributor': '9218175780',
+    'sa-author-mihajlo-pavloski': '2081921796',
+    'sa-author-esther-vaati': '9026604091',
+    'sa-author-adnan-rahic': '5829595117',
+    'sa-author-sam-galizia': '1890350103',
+    'sa-topic-node-js': '9234966588',
+    'sa-topic-javascript': '4871736666',
+    'sa-topic-python': '6017776300',
+    'sa-topic-java': '4704694632',
+    'sa-topic-machine-learning': '2618830613',
+    'sa-topic-ai': '7679585600',
+    'sa-topic-tensorflow': '2325943302',
+    'sa-topic-scikit-learn': '8801095589',
+    'sa-topic-algorithms': '9664898345',
+    'sa-topic-data-structures': '8884856065',
+    'sa-topic-aws': '6294351744',
+    'sa-topic-apache': '4220999970',
+    'sa-topic-django': '2399338763',
+    'sa-topic-flask': '3357197212',
+    'sa-topic-shell': '7386698293',
+    'sa-topic-bash': '6588621943',
+    'sa-topic-npm': '8417952206',
+    'sa-topic-unix': '4912578190',
+    'sa-topic-linux': '4029428281',
+    'sa-topic-json': '7104870536',
+    'sa-topic-maven': '2286414858',
+    'sa-topic-web-framework': '4321551251',
+    'sa-topic-security': '8660251512',
+    'sa-topic-arduino': '2649376939',
+    'sa-topic-express-js': '3008469582',
+    'sa-topic-es6': '3447453289',
+    'sa-topic-mongodb': '9382306243',
+    'sa-topic-how-to': '5443061231',
+    'sa-position-sidebar-top': '9190734552',
+    'sa-position-sidebar-middle': '5600217174',
+    'sa-position-sidebar-bottom': '3770886911',
+    'sa-position-content-top': '4789698384',
+    'sa-position-content-middle': '7686081194',
+    'sa-position-content-bottom': '4576223195',
+};
+</script>    <meta name="description" content="News, articles, and ideas for software engineers and web developers." />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="canonical" href="https://stackabuse.com/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="next" href="https://stackabuse.com/page/2/" />
+    
+    <meta property="og:site_name" content="Stack Abuse" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Stack Abuse" />
+    <meta property="og:description" content="News, articles, and ideas for software engineers and web developers." />
+    <meta property="og:url" content="https://stackabuse.com/" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Stack Abuse" />
+    <meta name="twitter:description" content="News, articles, and ideas for software engineers and web developers." />
+    <meta name="twitter:url" content="https://stackabuse.com/" />
+    <meta name="twitter:site" content="@ScottWRobinson" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Stack Abuse",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://stackabuse.com/favicon.ico",
+            "width": 60,
+            "height": 60
+        }
+    },
+    "url": "https://stackabuse.com/",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://stackabuse.com/"
+    },
+    "description": "News, articles, and ideas for software engineers and web developers."
+}
+    </script>
+
+    <script src="/public/ghost-sdk.min.js?v=69bda66e75"></script>
+<script>
+ghost.init({
+	clientId: "ghost-frontend",
+	clientSecret: "952da4a040f4"
+});
+</script>
+    <meta name="generator" content="Ghost 2.23" />
+    <link rel="alternate" type="application/rss+xml" title="Stack Abuse" href="https://stackabuse.com/rss/" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Repixel Code -->
+<script>
+  (function(w, d, s, id, src){
+  w.Repixel = r = {
+    init: function(id) {
+      w.repixelId = id;
+    }
+  };
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)){ return; }
+  js = d.createElement(s); 
+  js.id = id;
+  js.async = true;
+  js.onload = function(){
+      Repixel.init(w.repixelId);
+  };
+  js.src = src;
+  fjs.parentNode.insertBefore(js, fjs);
+  }(window, document, 'script', 'repixel', 
+  'https://sdk.repixel.co/r.js'));
+  Repixel.init('5cefff7fce3aad00089e44e5');
+</script>
+<!-- Repixel Code -->
+</head>
+<body class="home-template">
+	<nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <i class="fa fa-bars"></i>
+      </button>
+      <a class="navbar-brand" href="/">Stack <span style="color:#f16334;">Abuse</span></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+	<li class="nav-node-js" role="presentation"><a href="https://stackabuse.com/tag/node/">Node.js</a></li>
+	<li class="nav-python" role="presentation"><a href="https://stackabuse.com/tag/python">Python</a></li>
+	<li class="nav-java" role="presentation"><a href="https://stackabuse.com/tag/java/">Java</a></li>
+    <li class="nav-hireremote" role="presentation">
+        <a rel="nofollow" target="_blank" href="https://hireremote.io/"
+           ga-on="click"
+           ga-event-category="Jobs"
+           ga-event-action="Click"
+           ga-event-label="HR-Nav-Link"
+        >
+            Jobs
+        </a>
+    </li>
+</ul>
+      <!--<ul class="nav navbar-nav pull-right">
+        <li role="presentation">
+          <a class="btn btn-success nav-btn" href="http://jobs.stackabuse.com">Find a Job</a>
+        </li>
+        <li role="presentation">
+          <a class="btn btn-danger nav-btn" href="http://jobs.stackabuse.com/post">Post a Job</a>
+        </li>
+      </ul>-->
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+	<!-- start site's main content area -->
+<section class="content-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 main-content">
+                    <!-- start post -->
+<article class="post tag-api tag-javascript tag-tool">
+    <div class="featured">
+        <i class="fa fa-star"></i>
+    </div>
+    <div class="post-head-featured">
+        <h2 class="post-title"><a href="/getting-started-with-postman/">Getting Started with Postman</a></h2>
+        <div class="post-meta">
+            <span class="author">By <a href="/author/guest/">Guest Contributor</a></span>
+        </div>
+    </div>
+    <div class="post-content">
+        Introduction Testing an application means more than just clicking around until something breaks or trying different inputs until something isn't working right. While this is a good way to find anything that might break on the user facing side of the application, due to misuse - what is being neglected...
+    </div>
+    <div class="post-permalink">
+        <a href="/getting-started-with-postman/" class="btn btn-default">Continue Reading</a>
+    </div>
+</article>
+<!-- end post -->            </div>
+            <div class="col-md-4">
+                <div class="sidebar">
+                    <div class="widget">
+                        <h4 class="title">Our Sponsors</h4>
+                        <div class="content">
+                            <a class="do-link" rel="nofollow" target="_blank" href="https://stackabu.se/digitalocean">
+                                <img class="img-responsive" src="/assets/images/do/do-logo-horizontal-blue.svg?v=69bda66e75"
+                                    style="max-height: 125px;margin-left: auto;margin-right: auto;"
+                                >
+                            </a>
+                            <!-- <a class="tb-link" rel="nofollow" target="_blank" href="https://stackabu.se/triplebyte">
+                                <img class="img-responsive" src="/assets/images/logo-triplebyte.png?v=69bda66e75"
+                                    style="max-height: 125px;margin-left: auto;margin-right: auto;margin-top:30px;"
+                                >
+                            </a> -->
+                            <!-- <a class="hr-link" rel="nofollow" target="_blank" href="https://hireremote.io">
+                                <img class="img-responsive" src="/assets/images/logo-triplebyte.png?v=69bda66e75"
+                                    style="max-height: 125px;margin-left: auto;margin-right: auto;margin-top:30px;"
+                                >
+                            </a> -->
+                            <a rel="nofollow" href="/cdn-cgi/l/email-protection#b8cbdbd7cccc93cbc8d7d6cbd7cacbd0d1c8f8cbccd9dbd3d9dacdcbdd96dbd7d5">
+                                <div class="outline-box" style="max-height: 125px;">
+                                    <h4 class="text-center">Your logo here</h4>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="topic-icon-container">
+                    <!-- <h3 class="text-center">Explore a topic</h3> -->
+                    <div class="row">
+                        <div class="col-md-3">
+                            <a href="/tag/python">
+                                <img class="icon" src="/assets/images/sa-python-dark.svg?v=69bda66e75" style="max-height: 100px;">
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="/tag/node">
+                                <img class="icon" src="/assets/images/sa-node-dark.svg?v=69bda66e75" style="max-height: 100px;">
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="/tag/java">
+                                <img class="icon" src="/assets/images/sa-java-dark.svg?v=69bda66e75" style="max-height: 100px;">
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="/tag/unix">
+                                <img class="icon" src="/assets/images/sa-linux-dark.svg?v=69bda66e75" style="max-height: 100px;">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- start main post area -->
+            <div class="col-md-8 main-content">
+                    <!-- start post -->
+<article class="post tag-python tag-testing">
+    <div class="post-head">
+        <h2 class="post-title"><a href="/unit-testing-in-python-with-unittest/">Unit Testing in Python with Unittest</a></h2>
+        <div class="post-meta">
+            <span class="author">By <a href="/author/robley/">Robley Gori</a></span> &bull;
+            <span class="date">November 29, 2019</span> &bull;
+            <span class="comment-count"><a href="/unit-testing-in-python-with-unittest/#disqus_thread">0 Comments</a></span>
+        </div>
+    </div>
+    <div class="post-content">
+        <!--kg-card-begin: markdown--><h3 id="introduction">Introduction</h3>
+<p>In almost all fields, products are thoroughly tested before being released to the market to ensure its quality and that it works as intended.</p>
+<p>Medicine, cosmetic products, vehicles, phones, laptops are all tested to ensure that they uphold a certain level of quality that was promised to the consumer.</p>
+    </div>
+    <div class="post-permalink">
+        <a href="/unit-testing-in-python-with-unittest/" class="btn btn-default">Continue Reading</a>
+    </div>
+    <footer class="post-footer clearfix">
+        <div class="pull-left tag-list">
+            <i class="fa fa-folder-open-o"></i>
+            <a href="/tag/python/">python</a>,<a href="/tag/testing/">testing</a>
+        </div>
+        <div class="pull-right share">
+            <div>
+	<ul class="share-icons">
+		<!-- twitter -->
+		<li>
+			<a href="https://twitter.com/share?text=Unit%20Testing%20in%20Python%20with%20Unittest&amp;url=https://stackabuse.com/unit-testing-in-python-with-unittest/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;"><i class="fa fa-twitter" style="color:#55acee;"></i></a>
+		</li>
+		<!-- facebook -->
+		<li>
+			<a href="https://www.facebook.com/sharer/sharer.php?u=https://stackabuse.com/unit-testing-in-python-with-unittest/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;"><i class="fa fa-facebook" style="color:#3b5998;"></i></a>
+		</li>
+		<!-- google plus -->
+		<li>
+			<a href="https://plus.google.com/share?url=https://stackabuse.com/unit-testing-in-python-with-unittest/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;"><i class="fa fa-google-plus" style="color:#dc4e41;"></i></a>
+		</li>
+		<!-- linkedin -->
+		<li>
+			<a href="https://www.linkedin.com/shareArticle?mini=true%26url=https://stackabuse.com/unit-testing-in-python-with-unittest/%26source=https://stackabuse.com" onclick="window.open(this.href, 'linkedin-share', 'width=490,height=530');return false;"><i class="fa fa-linkedin" style="color:#0077b5;"></i></a>
+		</li>
+	</ul>
+</div>        </div>
+    </footer>
+</article>
+<!-- end post -->                    <!-- start post -->
+<article class="post tag-node tag-javascript tag-algorithms">
+    <div class="post-head">
+        <h2 class="post-title"><a href="/sorting-arrays-in-javascript/">Sorting Arrays in JavaScript</a></h2>
+        <div class="post-meta">
+            <span class="author">By <a href="/author/scott/">Scott Robinson</a></span> &bull;
+            <span class="date">November 28, 2019</span> &bull;
+            <span class="comment-count"><a href="/sorting-arrays-in-javascript/#disqus_thread">0 Comments</a></span>
+        </div>
+    </div>
+    <div class="post-content">
+        <!--kg-card-begin: markdown--><p>Like many other popular languages, JavaScript conveniently comes with a built-in method for sorting arrays. While the end result is the same, the various JavaScript engines implement this method using different sort algorithms:</p>
+<ul>
+<li>V8: Quicksort or Insertion Sort (for smaller arrays)</li>
+<li>Firefox: Merge sort</li>
+<li>Safari: Quicksort, Merge Sort, or Selection</li></ul>
+    </div>
+    <div class="post-permalink">
+        <a href="/sorting-arrays-in-javascript/" class="btn btn-default">Continue Reading</a>
+    </div>
+    <footer class="post-footer clearfix">
+        <div class="pull-left tag-list">
+            <i class="fa fa-folder-open-o"></i>
+            <a href="/tag/node/">node</a>,<a href="/tag/javascript/">javascript</a>,<a href="/tag/algorithms/">algorithms</a>
+        </div>
+        <div class="pull-right share">
+            <div>
+	<ul class="share-icons">
+		<!-- twitter -->
+		<li>
+			<a href="https://twitter.com/share?text=Sorting%20Arrays%20in%20JavaScript&amp;url=https://stackabuse.com/sorting-arrays-in-javascript/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;"><i class="fa fa-twitter" style="color:#55acee;"></i></a>
+		</li>
+		<!-- facebook -->
+		<li>
+			<a href="https://www.facebook.com/sharer/sharer.php?u=https://stackabuse.com/sorting-arrays-in-javascript/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;"><i class="fa fa-facebook" style="color:#3b5998;"></i></a>
+		</li>
+		<!-- google plus -->
+		<li>
+			<a href="https://plus.google.com/share?url=https://stackabuse.com/sorting-arrays-in-javascript/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;"><i class="fa fa-google-plus" style="color:#dc4e41;"></i></a>
+		</li>
+		<!-- linkedin -->
+		<li>
+			<a href="https://www.linkedin.com/shareArticle?mini=true%26url=https://stackabuse.com/sorting-arrays-in-javascript/%26source=https://stackabuse.com" onclick="window.open(this.href, 'linkedin-share', 'width=490,height=530');return false;"><i class="fa fa-linkedin" style="color:#0077b5;"></i></a>
+		</li>
+	</ul>
+</div>        </div>
+    </footer>
+</article>
+<!-- end post -->                    <!-- start post -->
+<article class="post tag-java tag-algorithms">
+    <div class="post-head">
+        <h2 class="post-title"><a href="/insertion-sort-in-java/">Insertion Sort in Java</a></h2>
+        <div class="post-meta">
+            <span class="author">By <a href="/author/david/">David Landup</a></span> &bull;
+            <span class="date">November 27, 2019</span> &bull;
+            <span class="comment-count"><a href="/insertion-sort-in-java/#disqus_thread">0 Comments</a></span>
+        </div>
+    </div>
+    <div class="post-content">
+        <!--kg-card-begin: markdown--><h3 id="introduction">Introduction</h3>
+<p>Sorting is a crucial aspect of digesting data. For us humans, it's much more natural to sort things that have something in common like the date of publishing, alphabetical order, articles belonging to an author, from smallest to largest, etc. This makes it a lot easier to comprehend the</p>
+    </div>
+    <div class="post-permalink">
+        <a href="/insertion-sort-in-java/" class="btn btn-default">Continue Reading</a>
+    </div>
+    <footer class="post-footer clearfix">
+        <div class="pull-left tag-list">
+            <i class="fa fa-folder-open-o"></i>
+            <a href="/tag/java/">java</a>,<a href="/tag/algorithms/">algorithms</a>
+        </div>
+        <div class="pull-right share">
+            <div>
+	<ul class="share-icons">
+		<!-- twitter -->
+		<li>
+			<a href="https://twitter.com/share?text=Insertion%20Sort%20in%20Java&amp;url=https://stackabuse.com/insertion-sort-in-java/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;"><i class="fa fa-twitter" style="color:#55acee;"></i></a>
+		</li>
+		<!-- facebook -->
+		<li>
+			<a href="https://www.facebook.com/sharer/sharer.php?u=https://stackabuse.com/insertion-sort-in-java/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;"><i class="fa fa-facebook" style="color:#3b5998;"></i></a>
+		</li>
+		<!-- google plus -->
+		<li>
+			<a href="https://plus.google.com/share?url=https://stackabuse.com/insertion-sort-in-java/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;"><i class="fa fa-google-plus" style="color:#dc4e41;"></i></a>
+		</li>
+		<!-- linkedin -->
+		<li>
+			<a href="https://www.linkedin.com/shareArticle?mini=true%26url=https://stackabuse.com/insertion-sort-in-java/%26source=https://stackabuse.com" onclick="window.open(this.href, 'linkedin-share', 'width=490,height=530');return false;"><i class="fa fa-linkedin" style="color:#0077b5;"></i></a>
+		</li>
+	</ul>
+</div>        </div>
+    </footer>
+</article>
+<!-- end post -->                    <!-- start post -->
+<article class="post tag-python tag-algorithms">
+    <div class="post-head">
+        <h2 class="post-title"><a href="/insertion-sort-in-python/">Insertion Sort in Python</a></h2>
+        <div class="post-meta">
+            <span class="author">By <a href="/author/olivera/">Olivera Popović</a></span> &bull;
+            <span class="date">November 26, 2019</span> &bull;
+            <span class="comment-count"><a href="/insertion-sort-in-python/#disqus_thread">0 Comments</a></span>
+        </div>
+    </div>
+    <div class="post-content">
+        <!--kg-card-begin: markdown--><h3 id="introduction">Introduction</h3>
+<p>If you're majoring in Computer Science, <em>Insertion Sort</em> is most likely one of the first sorting algorithms you have heard of. It is intuitive and easy to <a href="#implementation">implement</a>, but it's very slow on large arrays and is almost never used to sort them.</p>
+<p>Insertion sort is often illustrated by</p>
+    </div>
+    <div class="post-permalink">
+        <a href="/insertion-sort-in-python/" class="btn btn-default">Continue Reading</a>
+    </div>
+    <footer class="post-footer clearfix">
+        <div class="pull-left tag-list">
+            <i class="fa fa-folder-open-o"></i>
+            <a href="/tag/python/">python</a>,<a href="/tag/algorithms/">algorithms</a>
+        </div>
+        <div class="pull-right share">
+            <div>
+	<ul class="share-icons">
+		<!-- twitter -->
+		<li>
+			<a href="https://twitter.com/share?text=Insertion%20Sort%20in%20Python&amp;url=https://stackabuse.com/insertion-sort-in-python/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;"><i class="fa fa-twitter" style="color:#55acee;"></i></a>
+		</li>
+		<!-- facebook -->
+		<li>
+			<a href="https://www.facebook.com/sharer/sharer.php?u=https://stackabuse.com/insertion-sort-in-python/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;"><i class="fa fa-facebook" style="color:#3b5998;"></i></a>
+		</li>
+		<!-- google plus -->
+		<li>
+			<a href="https://plus.google.com/share?url=https://stackabuse.com/insertion-sort-in-python/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;"><i class="fa fa-google-plus" style="color:#dc4e41;"></i></a>
+		</li>
+		<!-- linkedin -->
+		<li>
+			<a href="https://www.linkedin.com/shareArticle?mini=true%26url=https://stackabuse.com/insertion-sort-in-python/%26source=https://stackabuse.com" onclick="window.open(this.href, 'linkedin-share', 'width=490,height=530');return false;"><i class="fa fa-linkedin" style="color:#0077b5;"></i></a>
+		</li>
+	</ul>
+</div>        </div>
+    </footer>
+</article>
+<!-- end post -->                    <!-- start post -->
+<article class="post tag-git">
+    <div class="post-head">
+        <h2 class="post-title"><a href="/git-ignore-files-with-gitignore/">Git: Ignore Files with .gitignore</a></h2>
+        <div class="post-meta">
+            <span class="author">By <a href="/author/scott/">Scott Robinson</a></span> &bull;
+            <span class="date">November 25, 2019</span> &bull;
+            <span class="comment-count"><a href="/git-ignore-files-with-gitignore/#disqus_thread">0 Comments</a></span>
+        </div>
+    </div>
+    <div class="post-content">
+        <!--kg-card-begin: markdown--><p>Git is a great tool for tracking all of the files in a project, whether you have only a few to track or thousands. But just because a file exists in your project doesn't mean you automatically want to keep track of it and its changes over the lifetime of</p>
+    </div>
+    <div class="post-permalink">
+        <a href="/git-ignore-files-with-gitignore/" class="btn btn-default">Continue Reading</a>
+    </div>
+    <footer class="post-footer clearfix">
+        <div class="pull-left tag-list">
+            <i class="fa fa-folder-open-o"></i>
+            <a href="/tag/git/">git</a>
+        </div>
+        <div class="pull-right share">
+            <div>
+	<ul class="share-icons">
+		<!-- twitter -->
+		<li>
+			<a href="https://twitter.com/share?text=Git%3A%20Ignore%20Files%20with%20.gitignore&amp;url=https://stackabuse.com/git-ignore-files-with-gitignore/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;"><i class="fa fa-twitter" style="color:#55acee;"></i></a>
+		</li>
+		<!-- facebook -->
+		<li>
+			<a href="https://www.facebook.com/sharer/sharer.php?u=https://stackabuse.com/git-ignore-files-with-gitignore/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;"><i class="fa fa-facebook" style="color:#3b5998;"></i></a>
+		</li>
+		<!-- google plus -->
+		<li>
+			<a href="https://plus.google.com/share?url=https://stackabuse.com/git-ignore-files-with-gitignore/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;"><i class="fa fa-google-plus" style="color:#dc4e41;"></i></a>
+		</li>
+		<!-- linkedin -->
+		<li>
+			<a href="https://www.linkedin.com/shareArticle?mini=true%26url=https://stackabuse.com/git-ignore-files-with-gitignore/%26source=https://stackabuse.com" onclick="window.open(this.href, 'linkedin-share', 'width=490,height=530');return false;"><i class="fa fa-linkedin" style="color:#0077b5;"></i></a>
+		</li>
+	</ul>
+</div>        </div>
+    </footer>
+</article>
+<!-- end post -->                    <!-- start post -->
+<article class="post tag-python tag-scikit-learn tag-pandas tag-numpy tag-machine-learning">
+    <div class="post-head">
+        <h2 class="post-title"><a href="/dimensionality-reduction-in-python-with-scikit-learn/">Dimensionality Reduction in Python with Scikit-Learn</a></h2>
+        <div class="post-meta">
+            <span class="author">By <a href="/author/daniel/">Dan Nelson</a></span> &bull;
+            <span class="date">November 22, 2019</span> &bull;
+            <span class="comment-count"><a href="/dimensionality-reduction-in-python-with-scikit-learn/#disqus_thread">0 Comments</a></span>
+        </div>
+    </div>
+    <div class="post-content">
+        <!--kg-card-begin: markdown--><h3 id="introduction">Introduction</h3>
+<p>In machine learning, the performance of a model only benefits from more features up until a certain point. The more features are fed into a model, the more the dimensionality of the data increases. As the dimensionality increases, overfitting becomes more likely.</p>
+<p>There are multiple techniques that can be</p>
+    </div>
+    <div class="post-permalink">
+        <a href="/dimensionality-reduction-in-python-with-scikit-learn/" class="btn btn-default">Continue Reading</a>
+    </div>
+    <footer class="post-footer clearfix">
+        <div class="pull-left tag-list">
+            <i class="fa fa-folder-open-o"></i>
+            <a href="/tag/python/">python</a>,<a href="/tag/scikit-learn/">scikit-learn</a>,<a href="/tag/pandas/">pandas</a>,<a href="/tag/numpy/">numpy</a>,<a href="/tag/machine-learning/">machine learning</a>
+        </div>
+        <div class="pull-right share">
+            <div>
+	<ul class="share-icons">
+		<!-- twitter -->
+		<li>
+			<a href="https://twitter.com/share?text=Dimensionality%20Reduction%20in%20Python%20with%20Scikit-Learn&amp;url=https://stackabuse.com/dimensionality-reduction-in-python-with-scikit-learn/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;"><i class="fa fa-twitter" style="color:#55acee;"></i></a>
+		</li>
+		<!-- facebook -->
+		<li>
+			<a href="https://www.facebook.com/sharer/sharer.php?u=https://stackabuse.com/dimensionality-reduction-in-python-with-scikit-learn/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;"><i class="fa fa-facebook" style="color:#3b5998;"></i></a>
+		</li>
+		<!-- google plus -->
+		<li>
+			<a href="https://plus.google.com/share?url=https://stackabuse.com/dimensionality-reduction-in-python-with-scikit-learn/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;"><i class="fa fa-google-plus" style="color:#dc4e41;"></i></a>
+		</li>
+		<!-- linkedin -->
+		<li>
+			<a href="https://www.linkedin.com/shareArticle?mini=true%26url=https://stackabuse.com/dimensionality-reduction-in-python-with-scikit-learn/%26source=https://stackabuse.com" onclick="window.open(this.href, 'linkedin-share', 'width=490,height=530');return false;"><i class="fa fa-linkedin" style="color:#0077b5;"></i></a>
+		</li>
+	</ul>
+</div>        </div>
+    </footer>
+</article>
+<!-- end post -->                    <!-- start post -->
+<article class="post tag-java tag-algorithms">
+    <div class="post-head">
+        <h2 class="post-title"><a href="/merge-sort-in-java/">Merge Sort in Java</a></h2>
+        <div class="post-meta">
+            <span class="author">By <a href="/author/david/">David Landup</a></span> &bull;
+            <span class="date">November 22, 2019</span> &bull;
+            <span class="comment-count"><a href="/merge-sort-in-java/#disqus_thread">0 Comments</a></span>
+        </div>
+    </div>
+    <div class="post-content">
+        <!--kg-card-begin: markdown--><h3 id="introduction">Introduction</h3>
+<p>Sorting is a crucial aspect of digesting data. For us humans, it's much more natural to sort things that have something in common like the date of publishing, alphabetical order, articles belonging to an author, from smallest to largest, etc. This makes it a lot easier to comprehend the</p>
+    </div>
+    <div class="post-permalink">
+        <a href="/merge-sort-in-java/" class="btn btn-default">Continue Reading</a>
+    </div>
+    <footer class="post-footer clearfix">
+        <div class="pull-left tag-list">
+            <i class="fa fa-folder-open-o"></i>
+            <a href="/tag/java/">java</a>,<a href="/tag/algorithms/">algorithms</a>
+        </div>
+        <div class="pull-right share">
+            <div>
+	<ul class="share-icons">
+		<!-- twitter -->
+		<li>
+			<a href="https://twitter.com/share?text=Merge%20Sort%20in%20Java&amp;url=https://stackabuse.com/merge-sort-in-java/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;"><i class="fa fa-twitter" style="color:#55acee;"></i></a>
+		</li>
+		<!-- facebook -->
+		<li>
+			<a href="https://www.facebook.com/sharer/sharer.php?u=https://stackabuse.com/merge-sort-in-java/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;"><i class="fa fa-facebook" style="color:#3b5998;"></i></a>
+		</li>
+		<!-- google plus -->
+		<li>
+			<a href="https://plus.google.com/share?url=https://stackabuse.com/merge-sort-in-java/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;"><i class="fa fa-google-plus" style="color:#dc4e41;"></i></a>
+		</li>
+		<!-- linkedin -->
+		<li>
+			<a href="https://www.linkedin.com/shareArticle?mini=true%26url=https://stackabuse.com/merge-sort-in-java/%26source=https://stackabuse.com" onclick="window.open(this.href, 'linkedin-share', 'width=490,height=530');return false;"><i class="fa fa-linkedin" style="color:#0077b5;"></i></a>
+		</li>
+	</ul>
+</div>        </div>
+    </footer>
+</article>
+<!-- end post -->                <!-- start pagination -->
+<nav class="pagination">
+	<span class="page-number">Page 1 of 68</span>
+	<a class="older-posts" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+</nav>
+<!-- end pagination -->
+            </div>
+            <!-- end main post area -->
+            <!-- start sidebar -->
+<div class="col-md-4 sidebar">
+    <!-- start widget -->
+<div class="widget">
+	<h4 class="title">
+        Ad
+    </h4>
+    <div class="content ad" style="min-height: 250px;">
+        <!-- 300x250/300x600 -->
+<div id="waldo-tag-3874"></div>    </div>
+</div>
+<!-- end widget -->    <!-- start widget -->
+<div class="widget">
+    <h4 class="title">Follow Us</h4>
+    <div class="content social">
+        <div class="row">
+            <div class="col-md-4 col-xs-12">
+                <a rel="nofollow" target="_blank" href="https://twitter.com/StackAbuse" style="color: #38A1F3;">
+                    <i class="fa fa-twitter fa-lg"></i>
+                    Twitter
+                </a>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <a rel="nofollow" target="_blank" href="https://www.facebook.com/stackabuse" style="color: #3b5998;">
+                    <i class="fa fa-facebook fa-lg"></i>
+                    Facebook
+                </a>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <a target="_blank" href="https://stackabuse.com/rss/" style="color: #f7a000;">
+                    <i class="fa fa-rss fa-lg"></i>
+                    RSS
+                </a>
+            </div>
+        </div>
+        <!-- <ul class="social">
+            <li><a href="https://twitter.com/StackAbuse"><i class="fa fa-twitter fa-lg"></i></a></li>
+            <li><a href="https://www.facebook.com/stackabuse"><i class="fa fa-facebook fa-lg"></i></a></li>
+            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+            <li><a href="#"><i class="fa fa-skype"></i></a></li>
+            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+            <li><a href="#"><i class="fa fa-vimeo-square"></i></a></li>
+            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+            <li><a href="#"><i class="fa fa-flickr"></i></a></li>
+            <li><a href="#"><i class="fa fa-tumblr"></i></a></li>
+            <li><a href="https://github.com/scottwrobinson"><i class="fa fa-github"></i></a></li>
+            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa fa-stack-overflow"></i></a></li>
+            <li><a href="#"><i class="fa fa-stack-exchange"></i></a></li>
+            <li><a href="#"><i class="fa fa-xing"></i></a></li>
+            <li><a href="#"><i class="fa fa-envelope"></i></a></li>
+            <li><a href="https://stackabuse.com/rss/"><i class="fa fa-rss fa-lg"></i></a></li>
+        </ul> -->
+    </div>
+</div>
+<!-- end widget -->    <!-- start newsletter widget -->
+<div class="widget">
+    <h4 class="title">Newsletter</h4>
+    <div class="content newsletter">
+        <p style="font-size: 16px;">Subscribe to our newsletter! Get occassional tutorials, guides, and reviews in your inbox.</p>
+        <form action="#" method="post" class="validate" novalidate>
+            <div class="input-group">
+                <input type="email" value="" name="email" class="required email input-lg" placeholder="Enter your email...">
+            </div>
+            <div class="input-group">
+                <button type="submit" name="subscribe" class="btn btn-lg btn-default"
+                    ga-on="click"
+                    ga-event-category="Newsletter"
+                    ga-event-action="Signup"
+                    ga-event-label="General-Newsletter-Signup"
+                >
+                    <i class="fa fa-spinner fa-pulse fa-fw" style="display:none;"></i>
+                    Subscribe
+                </button>
+            </div>
+            <span style="color: #7f7f7f;">No spam ever. Unsubscribe at any time.</span>
+        </form>
+        <div class="message"></div>
+    </div>
+</div>
+<!-- end tag cloud widget -->    <!-- start widget -->
+<div class="widget">
+    <h4 class="title">
+        Ad
+    </h4>
+    <div class="content ad" style="min-height: 250px;">
+        <!-- 300x250/300x600 -->
+<div id="waldo-tag-3876"></div>    </div>
+</div>
+<!-- end widget -->    <div class="widget-sticky">
+        <!-- start widget -->
+<div class="widget">
+    <h4 class="title">Our Sponsors</h4>
+    <div class="content text-center">
+        <a class="do-link" rel="nofollow" target="_blank" href="https://stackabu.se/digitalocean">
+            <img style="margin-left: auto;margin-right: auto;" 
+                alt="DigitalOcean"
+                src="/assets/images/do/do-logo-horizontal-blue.svg?v=69bda66e75">
+        </a>
+        <div style="margin: 15px 30px 0px 30px;font-size: 1.1em;">
+            The simplest cloud platform for developers and teams.
+        </div>
+        <div>
+            <a class="do-link" rel="nofollow" target="_blank" href="https://stackabu.se/digitalocean">Learn More</a>
+        </div>
+    </div>
+</div>
+<!-- end widget -->        <!-- start widget -->
+<div class="widget">
+    <h4 class="title">Want a remote job?</h4>
+    <div class="content jobs">
+        <ul style="margin-bottom: 0px;">
+        </ul>
+        <div class="row">
+            <div class="col-md-4">
+                <strong>
+                    <a rel="nofollow" target="_blank"
+                       class="btn btn-default"
+                       href="https://hireremote.io"
+                       style="margin-top: 10px;"
+                       ga-on="click"
+                       ga-event-category="Jobs"
+                       ga-event-action="Click"
+                       ga-event-label="HR-More-Link"
+                    >
+                        <i class="fa fa-arrow-circle-right"></i>&nbsp; More jobs
+                    </a>
+                </strong>
+            </div>
+            <div class="col-md-8 text-right" style="margin-top: 18px;">
+                Jobs via
+                <a rel="nofollow" target="_blank" href="https://hireremote.io"
+                   class="hr-link"
+                   style="color: #f16334;"
+                >
+                    HireRemote.io
+                </a>
+            </div>
+            <!-- <div class="col-md-9 text-right">
+                <span>Jobs by</span>
+                <a
+                    rel="nofollow" target="_blank"
+                    href="https://www.hireremote.io/"
+                    id="jobs_widget_link"
+                    ga-on="click"
+                    ga-event-category="Jobs"
+                    ga-event-action="Click"
+                    ga-event-label="HR-Jobs-By"
+                >
+                    <span id="hr_logo_container">
+                        <img
+                            id="hr_logo"
+                            src="https://www.ziprecruiter.com/img/logos/logo-sm-black-304px.png" alt="HireRemote.io"
+                            width="100"
+                        />
+                    </span>
+                </a>
+            </div> -->
+        </div>
+    </div>
+</div>
+<!-- end widget -->    </div>
+</div>
+<!-- end sidebar -->        </div>
+    </div>
+</section>
+<!-- end site's main content area -->
+
+	<!-- start main-footer -->
+	<footer class="main-footer">
+		<div class="container">
+			<div class="row">
+				<!-- start first footer widget area -->
+				<div class="col-sm-4">
+					<!-- start widget -->
+<div class="widget">
+    <h4 class="title">Recent Posts</h4>
+    <div class="content recent-post">
+        <div class="recent-single-post">
+            <a href="/getting-started-with-postman/" class="post-title">Getting Started with Postman</a>
+            <!--<div class="date">November 30, 2019</div>-->
+        </div>
+        <div class="recent-single-post">
+            <a href="/unit-testing-in-python-with-unittest/" class="post-title">Unit Testing in Python with Unittest</a>
+            <!--<div class="date">November 29, 2019</div>-->
+        </div>
+        <div class="recent-single-post">
+            <a href="/sorting-arrays-in-javascript/" class="post-title">Sorting Arrays in JavaScript</a>
+            <!--<div class="date">November 28, 2019</div>-->
+        </div>
+    </div>
+</div>
+<!-- end widget -->				</div>
+				<!-- end first footer widget area -->
+				<!-- start second footer widget area -->
+				<div class="col-sm-4">
+					<!-- start tag cloud widget -->
+<div class="widget">
+    <h4 class="title">Tags</h4>
+    <div class="content tag-cloud">
+        <a href="/tag/ai/">ai</a><a href="/tag/algorithms/">algorithms</a><a href="/tag/amqp/">amqp</a><a href="/tag/angular/">angular</a><a href="/tag/announcements/">announcements</a><a href="/tag/apache/">apache</a><a href="/tag/api/">api</a><a href="/tag/arduino/">arduino</a><a href="/tag/artificial-intelligence/">artificial intelligence</a><a href="/tag/asynchronous/">asynchronous</a>
+    </div>
+</div>
+<!-- end tag cloud widget -->
+				</div>
+				<!-- end second footer widget area -->
+				<!-- start third footer widget area -->
+				<div class="col-sm-4">
+					<!-- start widget -->
+<div class="widget">
+    <h4 class="title">Follow Us</h4>
+    <div class="content social">
+        <div class="row">
+            <div class="col-md-4 col-xs-12">
+                <a rel="nofollow" target="_blank" href="https://twitter.com/StackAbuse" style="color: #38A1F3;">
+                    <i class="fa fa-twitter fa-lg"></i>
+                    Twitter
+                </a>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <a rel="nofollow" target="_blank" href="https://www.facebook.com/stackabuse" style="color: #3b5998;">
+                    <i class="fa fa-facebook fa-lg"></i>
+                    Facebook
+                </a>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <a target="_blank" href="https://stackabuse.com/rss/" style="color: #f7a000;">
+                    <i class="fa fa-rss fa-lg"></i>
+                    RSS
+                </a>
+            </div>
+        </div>
+        <!-- <ul class="social">
+            <li><a href="https://twitter.com/StackAbuse"><i class="fa fa-twitter fa-lg"></i></a></li>
+            <li><a href="https://www.facebook.com/stackabuse"><i class="fa fa-facebook fa-lg"></i></a></li>
+            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+            <li><a href="#"><i class="fa fa-skype"></i></a></li>
+            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+            <li><a href="#"><i class="fa fa-vimeo-square"></i></a></li>
+            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+            <li><a href="#"><i class="fa fa-flickr"></i></a></li>
+            <li><a href="#"><i class="fa fa-tumblr"></i></a></li>
+            <li><a href="https://github.com/scottwrobinson"><i class="fa fa-github"></i></a></li>
+            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa fa-stack-overflow"></i></a></li>
+            <li><a href="#"><i class="fa fa-stack-exchange"></i></a></li>
+            <li><a href="#"><i class="fa fa-xing"></i></a></li>
+            <li><a href="#"><i class="fa fa-envelope"></i></a></li>
+            <li><a href="https://stackabuse.com/rss/"><i class="fa fa-rss fa-lg"></i></a></li>
+        </ul> -->
+    </div>
+</div>
+<!-- end widget -->				</div>
+				<!-- end third footer widget area -->
+			</div>
+		</div>
+	</footer>
+	<!-- end main-footer -->
+	<!-- start copyright section -->
+<div class="copyright">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				Copyright &copy; 2019, <a href="https://stackabuse.com">Stack Abuse</a>.  All Rights Reserved.
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end copyright section -->	<div class="footer-links">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<a href="/disclosure">Disclosure</a>
+					•
+					<a href="/privacy-policy">Privacy Policy</a>
+					•
+					<a href="/terms-of-service">Terms of Service</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<a href="#" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+	<!--
+<script src="//my.hellobar.com/4dd9990be00532b0fc7961824b7d7a0930e9e2b7.js" type="text/javascript" charset="utf-8" async="async"></script>
+-->
+	<!-- scripts -->
+	<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript">
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+
+    <!-- HTML templates for use in JS code -->
+    <script id="newsletter-template" type="text/x-custom-template">
+        <!-- start newsletter section -->
+<div class="section">
+    <div class="newsletter text-center">
+        <h4 class="title">Subscribe to our Newsletter</h4>
+        <div class="content">        
+            <form action="#" method="post" class="form-inline validate" novalidate>
+                <div class="row">
+                    <div class="col-md-9 col-md-offset-1 col-xs-12">
+                        <p>Get occassional tutorials, guides, and reviews in your inbox. No spam ever. Unsubscribe at any time.</p>
+                    </div>
+                    <div class="col-md-2 col-xs-12"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-7 col-md-offset-1 col-xs-12">
+                        <input type="email" value="" name="email" class="form-control input-lg required email" placeholder="Enter your email..." style="width:100%;">
+                    </div>
+                    <div class="col-md-4 col-xs-12 text-left">
+                        <button type="submit" name="subscribe" class="btn btn-default btn-lg btn-subscribe"
+                            ga-on="click"
+                            ga-event-category="Newsletter"
+                            ga-event-action="Signup"
+                            ga-event-label="General-Newsletter-Signup"
+                        >
+                            <i class="fa fa-spinner fa-pulse fa-fw" style="display:none;"></i>
+                            Subscribe
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <div class="message"></div>
+        </div>
+    </div>
+</div>
+<!-- end newsletter section -->    </script>
+
+    <!-- <script src="/assets/js/jquery.adsenseloader.js?v=69bda66e75"></script> -->
+	<script src="/assets/js/jquery.fitvids.js?v=69bda66e75"></script>
+	<script src="/assets/js/bootstrap.min.js?v=69bda66e75"></script>
+    <!-- <script src="/assets/js/jflickrfeed.min.js?v=69bda66e75"></script> -->
+	<!-- <script src="/assets/js/highlight.pack.js?v=69bda66e75"></script> -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/dockerfile.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/yaml.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.4.0/highlightjs-line-numbers.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+	<!-- <script src="/assets/js/indeed.js?v=69bda66e75"></script> -->
+	<script src="/assets/js/main.js?v=69bda66e75"></script>
+	<!-- <script src="//gdc.indeed.com/ads/apiresults.js" type="text/javascript"></script> -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript" async></script>
+	<!-- Add your analytic code below -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  if (window.location.hostname !== 'localhost') {
+    ga('create', 'UA-43140675-1', 'auto');
+    ga('require', 'eventTracker');
+    ga('send', 'pageview');
+  }
+
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/autotrack/1.0.1/autotrack.js"></script></body>
+</html>

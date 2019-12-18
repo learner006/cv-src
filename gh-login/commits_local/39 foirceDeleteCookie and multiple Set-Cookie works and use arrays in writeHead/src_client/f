@@ -1,0 +1,30 @@
+
+> APWebpack@1.0.0 lint I:\.rs_school\2019Q3\124_codejam-image-api_new\learner006-RS2019Q3\codejam-image-api\src_client
+> eslint ./src
+
+
+I:\.rs_school\2019Q3\124_codejam-image-api_new\learner006-RS2019Q3\codejam-image-api\src_client\src\image-api\js\controller.js
+  3:5  warning  Unexpected alert  no-alert
+
+I:\.rs_school\2019Q3\124_codejam-image-api_new\learner006-RS2019Q3\codejam-image-api\src_client\src\image-api\js\logger.js
+  1:1  error    Prefer default export  import/prefer-default-export
+  3:5  warning  Unexpected alert       no-alert
+
+I:\.rs_school\2019Q3\124_codejam-image-api_new\learner006-RS2019Q3\codejam-image-api\src_client\src\image-api\js\main.js
+   2:8  error  'say' is defined but never used                               no-unused-vars
+   3:8  error  'Controller' is defined but never used                        no-unused-vars
+   4:8  error  'Session' is defined but never used                           no-unused-vars
+   8:3  error  Expected exception block, space or tab after '//' in comment  spaced-comment
+   9:3  error  Expected exception block, space or tab after '//' in comment  spaced-comment
+  10:3  error  Expected exception block, space or tab after '//' in comment  spaced-comment
+  11:3  error  Do not use 'new' for side effects                             no-new
+
+I:\.rs_school\2019Q3\124_codejam-image-api_new\learner006-RS2019Q3\codejam-image-api\src_client\src\image-api\js\say.js
+  2:3  warning  Unexpected console statement  no-console
+
+I:\.rs_school\2019Q3\124_codejam-image-api_new\learner006-RS2019Q3\codejam-image-api\src_client\src\image-api\js\session.js
+  3:5  warning  Unexpected alert  no-alert
+
+✖ 12 problems (8 errors, 4 warnings)
+  3 errors and 0 warnings potentially fixable with the `--fix` option.
+

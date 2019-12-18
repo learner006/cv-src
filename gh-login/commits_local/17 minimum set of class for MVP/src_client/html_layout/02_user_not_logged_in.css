@@ -1,0 +1,30 @@
+body {
+  background-color: #ebebe0;
+}
+
+header {
+  font-size: 1.2em;
+}
+
+.task-title {
+  float: left;
+	margin-left: 10%;
+	font-weight: bold;
+}
+
+.inline-material-icon {
+  vertical-align: bottom;
+}
+
+header p {
+  display: inline-block;
+}
+
+divxx {
+  border: 2px solid black;
+}
+
+.login-status-info {
+  float: right;
+  margin-right: 2%;
+}
